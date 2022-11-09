@@ -3,7 +3,7 @@
 
 ## Import files (Colors, Fonts, Etc)
 import:
-  - ~/.config/alacritty/themes/tokyonight_storm.yml
+  - ~/.config/alacritty/themes/kanagawa.yml
   - ~/.config/alacritty/fonts.yml
 
 ## Set environment variables
