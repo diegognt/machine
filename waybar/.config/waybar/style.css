@@ -1,0 +1,119 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Noto Sans, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+  border-bottom: 0px;
+  color: #DCD7BA;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left {
+    margin-left: 6px;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right {
+    margin-right: 6px;
+}
+
+#workspaces button,
+#pulseaudio,
+#network,
+#backlight,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#clock {
+  background-color: #16161D;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 2px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+#workspaces button {
+  border-color: #727169;
+  color: #727169;
+  margin-right: 4px;
+}
+
+#workspaces button.active {
+  border-color: #7FB4CA;
+  color: #7FB4CA;
+}
+
+#backlight {
+  border-color: #727169;
+  color: #727169;
+}
+
+#network {
+  border-color: #717C7C;
+  color: #717C7C;
+}
+
+#network.wifi {
+  border-color: #7FB4CA;
+  color: #7FB4CA;
+}
+
+#network.ethernet {
+  border-color: #7E9CD8;
+  color: #7E9CD8;
+}
+
+#clock {
+  border-color: #A3D4D5;
+  color: #A3D4D5;
+}
+
+#pulseaudio,
+#battery.good {
+  border-color: #76946A;
+  color: #76946A;
+}
+
+#battery.warning {
+  border-color: #FFA066;
+  color: #FFA066;
+}
+
+#temperature.critical,
+#battery.critical {
+  border-color: #FF5D62;
+  color: #FF5D62;
+}
+
+#cpu {
+  border-color: #D27E99;
+  color: #D27E99;
+}
+
+#memory {
+  border-color: #DCA561;
+  color: #DCA561;
+}
+
+#temperature {
+  border-color: #7AA89F;
+  color: #7AA89F;
+}
+
+#pulseaudio.bluetooth {
+  border-color: #6A9589;
+  color: #6A9589;
+}
+
+#pulseaudio.muted {
+  border-color: #727169;
+  color: #727169;
+}
