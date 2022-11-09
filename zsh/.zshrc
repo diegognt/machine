@@ -1,8 +1,3 @@
-# Set up the prompt
-autoload -Uz promptinit
-promptinit
-prompt adam1
-
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
@@ -35,11 +30,6 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# Golang set up
-# Follows the instructions on https://go.dev/doc/install
-# to install Golang.
-export PATH=$PATH:~/go/bin
-
 # Completions
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
@@ -61,4 +51,11 @@ eval "$(pyenv init -)"
 fpath+=$HOME/.zsh/typewritten
 autoload -U promptinit; promptinit
 prompt typewritten
+#Customs
 TYPEWRITTEN_PROMPT_LAYOUT="multiline"
+
+# ZSH Highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# ZSH autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
