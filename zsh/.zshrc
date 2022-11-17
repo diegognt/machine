@@ -42,15 +42,11 @@ export PATH=/home/diegognt/.fnm:$PATH
 eval "`fnm env`"
 eval "$(fnm env --use-on-cd)"
 
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 # Prompt theme
 fpath+=$HOME/.zsh/typewritten
 autoload -U promptinit; promptinit
 prompt typewritten
+
 #Customs
 TYPEWRITTEN_PROMPT_LAYOUT="multiline"
 
