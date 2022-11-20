@@ -30,6 +30,6 @@ xinput set-prop 10 "libinput Tapping Enabled" 1 # Tapping to click
 xinput set-prop 11 "libinput Natural Scrolling Enabled" 1 # Natural scrolling
 xinput set-prop 11 "libinput Tapping Enabled" 1 # Tapping to click
 
-# picom &
+picom &
 sh $HOME/.config/polybar/launch.sh & #Polybar
 dunst &
