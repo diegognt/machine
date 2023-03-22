@@ -1,41 +1,39 @@
 ## It's a very basic and simple config file for full Alacritty configuration...
 ## See, /usr/share/doc/alacritty/example/alacritty.yml
 
-## Import files (Colors, Fonts, Etc)
-import:
-  - ~/.config/alacritty/themes/kanagawa.yml
-  - ~/.config/alacritty/fonts.yml
+## Cursor
+cursor:
+  style:
+    blinking: On
+    shape: Block
+
+  unfocused_hollow: false
 
 ## Set environment variables
 env:
   TERM: alacritty
 
-## Terminal window settings
-window:
-  dimensions:
-    columns: 82
-    lines: 25
+history: 10000
 
-  padding:
-    x: 8
-    y: 8
-
-  opacity: 0.92
-  decorations: full
-  startup_mode: Windowed
-  dynamic_title: true
-
-## scrolling
-  history: 10000
-  multiplier: 3
-
-## Cursor
-cursor:
-  style:
-    shape: Block
-    blinking: On
-
-  unfocused_hollow: false
+## Import files (Colors, Fonts, Etc)
+import:
+  - ~/.config/alacritty/fonts.yml
+  - ~/.config/alacritty/themes/nord.yml
 
 ## Live config reload
 live_config_reload: true
+
+multiplier: 3
+
+## Terminal window settings
+window:
+  decorations: full
+  dimensions:
+    columns: 82
+    lines: 25
+  dynamic_title: true
+  opacity: 0.92
+  padding:
+    x: 8
+    y: 8
+  startup_mode: Windowed
