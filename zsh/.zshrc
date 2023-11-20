@@ -62,10 +62,10 @@ export TYPEWRITTEN_PROMPT_LAYOUT="singleline"
 
 # ZSH completion
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
-  autoload -Uz compinit
-  compinit
+    autoload -Uz compinit
+    compinit
 fi
 
 # ZSH Highlighting
@@ -76,5 +76,3 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Copilot CLI
 eval "$(github-copilot-cli alias -- "$0")"
-
-export OPENAI_API_KEY='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'
