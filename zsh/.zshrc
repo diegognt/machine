@@ -17,7 +17,6 @@ zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
@@ -38,9 +37,20 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 
 # fnm
-export PATH=/home/diegognt/.fnm:$PATH
+export PATH="$HOME/.fnm:$PATH"
 eval "`fnm env`"
 eval "$(fnm env --use-on-cd)"
+
+# Exporting local Binaries
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+
+# Sourcing scripts
+source $HOME/.config/zsh/scripts.zsh
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # Prompt theme
 fpath+=$HOME/.zsh/typewritten
@@ -48,10 +58,23 @@ autoload -U promptinit; promptinit
 prompt typewritten
 
 #Customs
-TYPEWRITTEN_PROMPT_LAYOUT="multiline"
+export TYPEWRITTEN_PROMPT_LAYOUT="singleline"
+
+# ZSH completion
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
 
 # ZSH Highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # ZSH autosuggestions
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Copilot CLI
+eval "$(github-copilot-cli alias -- "$0")"
+
+export OPENAI_API_KEY='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'
