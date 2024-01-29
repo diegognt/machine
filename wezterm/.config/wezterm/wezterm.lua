@@ -17,12 +17,46 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 
 -- Settings
 
-config.color_scheme = "Tokyo Night"
+config.color_scheme = "nightfox"
 config.font = wezterm.font_with_fallback({
   { family = "Monaspace Argon",         scale = 1.30, weight = "Medium", },
   { family = "JetBrainsMono Nerd Font", scale = 1.30, weight = "Medium", },
 })
-config.window_background_opacity = 0.9
+
+config.font_rules = {
+  {
+    intensity = 'Bold',
+    italic = true,
+    font = wezterm.font {
+      family = 'Monaspace Radon',
+      weight = 'Bold',
+      style = 'Italic',
+      scale = 1.33,
+    },
+  },
+  {
+    italic = true,
+    intensity = 'Half',
+    font = wezterm.font {
+      family = 'Monaspace Radon',
+      weight = 'DemiBold',
+      style = 'Italic',
+      scale = 1.33,
+    },
+  },
+  {
+    italic = true,
+    intensity = 'Normal',
+    font = wezterm.font {
+      family = 'Monaspace Radon',
+      style = 'Italic',
+      weight = 'Medium',
+      scale = 1.33,
+    },
+  },
+}
+
+config.window_background_opacity = 1
 config.window_decorations = "RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
@@ -145,6 +179,13 @@ wezterm.on("update-status", function(window, pane)
   -- Time
   local time = wezterm.strftime("%H:%M")
 
+  --Battery
+    local bat = ''
+  for _, b in ipairs(wezterm.battery_info()) do
+    bat = '🔋' .. string.format('%.0f%%', b.state_of_charge * 100)
+  end
+
+
   -- Left status (left of the tab line)
   window:set_left_status(wezterm.format({
     { Foreground = { Color = stat_color } },
@@ -164,8 +205,34 @@ wezterm.on("update-status", function(window, pane)
     "ResetAttributes",
     { Text = " | " },
     { Text = wezterm.nerdfonts.md_clock .. "  " .. time },
+    { Text = " | " },
+    { Text = bat },
     { Text = "  " },
   }))
+end)
+
+-- Neovim Zen mode
+wezterm.on('user-var-changed', function(window, pane, name, value)
+    local overrides = window:get_config_overrides() or {}
+    if name == "ZEN_MODE" then
+        local incremental = value:find("+")
+        local number_value = tonumber(value)
+        if incremental ~= nil then
+            while (number_value > 0) do
+                window:perform_action(wezterm.action.IncreaseFontSize, pane)
+                number_value = number_value - 1
+            end
+            overrides.enable_tab_bar = false
+        elseif number_value < 0 then
+            window:perform_action(wezterm.action.ResetFontSize, pane)
+            overrides.font_size = nil
+            overrides.enable_tab_bar = true
+        else
+            overrides.font_size = number_value
+            overrides.enable_tab_bar = false
+        end
+    end
+    window:set_config_overrides(overrides)
 end)
 
 
