@@ -1,1 +1,1 @@
-# Linux machine Dotfiles
+# Machine Dotfiles
