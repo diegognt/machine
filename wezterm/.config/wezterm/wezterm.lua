@@ -16,11 +16,19 @@ local config = {}
 if wezterm.config_builder then config = wezterm.config_builder() end
 
 -- Settings
-
 config.color_scheme = "nightfox"
 config.font = wezterm.font_with_fallback({
-  { family = "Monaspace Argon",         scale = 1.30, weight = "Medium", },
-  { family = "JetBrainsMono Nerd Font", scale = 1.30, weight = "Medium", },
+  {
+    family = "Monaspace Argon",
+    scale = 1.30,
+    weight = "Medium",
+    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04'},
+  },
+  {
+    family = "JetBrainsMono Nerd Font",
+    scale = 1.30,
+    weight = "Medium",
+  },
 })
 
 config.font_rules = {
@@ -32,6 +40,7 @@ config.font_rules = {
       weight = 'Bold',
       style = 'Italic',
       scale = 1.33,
+      harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04'},
     },
   },
   {
@@ -42,6 +51,7 @@ config.font_rules = {
       weight = 'DemiBold',
       style = 'Italic',
       scale = 1.33,
+      harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04'},
     },
   },
   {
@@ -52,6 +62,7 @@ config.font_rules = {
       style = 'Italic',
       weight = 'Medium',
       scale = 1.33,
+      harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04'},
     },
   },
 }
@@ -63,7 +74,11 @@ config.scrollback_lines = 3000
 config.default_workspace = "main"
 
 -- Keys
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = {
+  key = "a",
+  mods = "CTRL",
+  timeout_milliseconds = 1000
+}
 config.keys = {
   -- Send C-a when pressing C-a twice
   { key = "a",          mods = "LEADER|CTRL", action = act.SendKey { key = "a", mods = "CTRL" } },
@@ -149,66 +164,48 @@ config.key_tables = {
 config.use_fancy_tab_bar = false
 config.status_update_interval = 1000
 config.tab_bar_at_bottom = false
-wezterm.on("update-status", function(window, pane)
-  -- Workspace name
+wezterm.on("update-status", function (window, _)
   local stat = window:active_workspace()
-  local stat_color = "#f7768e"
+  local stat_color = "#7dcfff"
   -- It's a little silly to have workspace name all the time
   -- Utilize this to display LDR or current key table name
   if window:active_key_table() then
+    stat_color = "#f7768e"
     stat = window:active_key_table()
-    stat_color = "#7dcfff"
   end
   if window:leader_is_active() then
-    stat = "LDR"
+    stat = "Leader Key"
     stat_color = "#bb9af7"
   end
-
-  -- Current working directory
-  local basename = function(s)
-    -- Nothing a little regex can't fix
-    return string.gsub(s, "(.*[/\\])(.*)", "%2")
-  end
-  -- CWD and CMD could be nil (e.g. viewing log using Ctrl-Alt-l). Not a big deal, but check in case
-  local cwd = pane:get_current_working_dir()
-  cwd = cwd and basename(cwd) or ""
-  -- Current command
-  local cmd = pane:get_foreground_process_name()
-  cmd = cmd and basename(cmd) or ""
-
-  -- Time
-  local time = wezterm.strftime("%H:%M")
-
-  --Battery
-    local bat = ''
-  for _, b in ipairs(wezterm.battery_info()) do
-    bat = '🔋' .. string.format('%.0f%%', b.state_of_charge * 100)
-  end
-
-
   -- Left status (left of the tab line)
   window:set_left_status(wezterm.format({
     { Foreground = { Color = stat_color } },
     { Text = "  " },
     { Text = wezterm.nerdfonts.oct_table .. "  " .. stat },
-    { Text = " |" },
+    { Text = " | " },
   }))
 
-  -- Right status
-  window:set_right_status(wezterm.format({
-    -- Wezterm has a built-in nerd fonts
-    -- https://wezfurlong.org/wezterm/config/lua/wezterm/nerdfonts.html
-    { Text = wezterm.nerdfonts.md_folder .. "  " .. cwd },
-    { Text = " | " },
-    { Foreground = { Color = "#e0af68" } },
-    { Text = wezterm.nerdfonts.fa_code .. "  " .. cmd },
-    "ResetAttributes",
-    { Text = " | " },
-    { Text = wezterm.nerdfonts.md_clock .. "  " .. time },
-    { Text = " | " },
-    { Text = bat },
-    { Text = "  " },
-  }))
+  -- Current working directory
+  -- local basename = function(s)
+  --   -- Nothing a little regex can't fix
+  --   return string.gsub(s, "(.*[/\\])(.*)", "%2")
+  -- end
+  -- CWD and CMD could be nil (e.g. viewing log using Ctrl-Alt-l). Not a big deal, but check in case
+  -- local cwd = pane:get_current_working_dir()
+  -- cwd = cwd and basename(cwd) or ""
+
+  -- Current command
+  -- local cmd = pane:get_foreground_process_name()
+  -- cmd = cmd and basename(cmd) or ""
+
+  -- Time
+  -- local time = wezterm.strftime("%H:%M")
+
+  --Battery
+  --   local bat = ''
+  -- for _, b in ipairs(wezterm.battery_info()) do
+  --   bat = '🔋' .. string.format('%.0f%%', b.state_of_charge * 100)
+  -- end
 end)
 
 -- Neovim Zen mode
@@ -234,6 +231,5 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
     end
     window:set_config_overrides(overrides)
 end)
-
 
 return config
