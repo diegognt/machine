@@ -37,9 +37,11 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 
 # fnm
-export PATH="$HOME/.fnm:$PATH"
-eval "`fnm env`"
-eval "$(fnm env --use-on-cd)"
+FNM_PATH="$HOME/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$HOME/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
 
 # Exporting local Binaries
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
@@ -51,6 +53,7 @@ source $HOME/.config/zsh/scripts.zsh
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Prompt theme
 fpath+=$HOME/.zsh/typewritten
@@ -60,19 +63,17 @@ prompt typewritten
 #Customs
 export TYPEWRITTEN_PROMPT_LAYOUT="singleline"
 
-# ZSH completion
-if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+if [[ "$(uname)" == "Darwin" ]]; then
+    # ZSH Highlighting
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-    autoload -Uz compinit
-    compinit
+    # ZSH autosuggestions
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh# ZSH autosuggestions
+
+elif [[ "$(uname)" == "Linux" ]]; then
+    # ZSH autosuggestions
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+    # ZSH Highlighting
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
-
-# ZSH Highlighting
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# ZSH autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Copilot CLI
-eval "$(github-copilot-cli alias -- "$0")"
