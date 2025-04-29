@@ -1,53 +1,30 @@
-/*
-* Variant: Rosé Pine Moon
-* Maintainer: DankChoir
-*/
-
-@define-color base            #232136;
-@define-color base-80         rgba(35,35,54,0.8);
-@define-color surface         #2a273f;
-@define-color surface-80      rgba(42,39,63,0.8);
-@define-color overlay         #393552;
-
-@define-color muted           #6e6a86;
-@define-color subtle          #908caa;
-@define-color text            #e0def4;
-
-@define-color love            #eb6f92;
-@define-color gold            #f6c177;
-@define-color rose            #ea9a97;
-@define-color pine            #3e8fb0;
-@define-color foam            #9ccfd8;
-@define-color iris            #c4a7e7;
-
-@define-color highlightLow    #2a283e;
-@define-color highlightMed    #44415a;
-@define-color highlightHigh   #56526e;
+@import "./colors.css";
 
 * {
   border: none;
   border-radius: 0;
-  font-family: Noto Sans, Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-family: "MonaspiceAr Nerd Font", Noto Sans;
+  font-size: 12px;
   min-height: 0;
 }
 
 window#waybar {
   background: transparent;
   border-bottom: 0px;
-  color: #DCD7BA;
+  color: @text;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left {
-    margin-left: 6px;
+  margin-left: 6px;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right {
-    margin-right: 6px;
+  margin-right: 6px;
 }
 
+#window,
 #workspaces button,
 #pulseaudio,
 #network,
@@ -57,13 +34,13 @@ window#waybar {
 #temperature,
 #battery,
 #clock {
-  background-color: @base;
-  border-radius: 20px;
-  color: @iris;
+  background-color: @surface-80;
+  border-radius: 22px;
+  border-width: 0px;
   font-size: 14px;
   font-weight: 500;
   margin-top: 4px;
-  padding: 4px 10px;
+  padding: 2px 12px;
 }
 
 #workspaces button {
