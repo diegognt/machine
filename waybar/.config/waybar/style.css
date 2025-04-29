@@ -1,3 +1,29 @@
+/*
+* Variant: Rosé Pine Moon
+* Maintainer: DankChoir
+*/
+
+@define-color base            #232136;
+@define-color base-80         rgba(35,35,54,0.8);
+@define-color surface         #2a273f;
+@define-color surface-80      rgba(42,39,63,0.8);
+@define-color overlay         #393552;
+
+@define-color muted           #6e6a86;
+@define-color subtle          #908caa;
+@define-color text            #e0def4;
+
+@define-color love            #eb6f92;
+@define-color gold            #f6c177;
+@define-color rose            #ea9a97;
+@define-color pine            #3e8fb0;
+@define-color foam            #9ccfd8;
+@define-color iris            #c4a7e7;
+
+@define-color highlightLow    #2a283e;
+@define-color highlightMed    #44415a;
+@define-color highlightHigh   #56526e;
+
 * {
   border: none;
   border-radius: 0;
@@ -31,89 +57,58 @@ window#waybar {
 #temperature,
 #battery,
 #clock {
-  background-color: #16161D;
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 2px;
-  font-size: 16px;
+  background-color: @base;
+  border-radius: 20px;
+  color: @iris;
+  font-size: 14px;
   font-weight: 500;
   margin-top: 4px;
+  padding: 4px 10px;
 }
 
 #workspaces button {
-  border-color: #727169;
-  color: #727169;
-  margin-right: 4px;
+  background-color: @base;
+  color: @iris;
+  margin-right: 6px;
+}
+
+#workspaces button:last-child {
+  margin-right: 0px;
 }
 
 #workspaces button.active {
-  border-color: #7FB4CA;
-  color: #7FB4CA;
+  background-color: @foam;
+  color: @base;
 }
 
-#backlight {
-  border-color: #727169;
-  color: #727169;
-}
-
-#network {
-  border-color: #717C7C;
-  color: #717C7C;
-}
-
-#network.wifi {
-  border-color: #7FB4CA;
-  color: #7FB4CA;
-}
-
-#network.ethernet {
-  border-color: #7E9CD8;
-  color: #7E9CD8;
-}
-
-#clock {
-  border-color: #A3D4D5;
-  color: #A3D4D5;
+#workspaces button:hover {
+  background: @iris;
+  color: @base;
 }
 
 #pulseaudio,
 #battery.good {
-  border-color: #76946A;
-  color: #76946A;
+  border-color: @foam;
+  color: @foam;
 }
 
 #battery.warning {
-  border-color: #FFA066;
-  color: #FFA066;
+  border-color: @gold;
+  color: @gold;
 }
 
 #temperature.critical,
 #battery.critical {
-  border-color: #FF5D62;
-  color: #FF5D62;
-}
-
-#cpu {
-  border-color: #D27E99;
-  color: #D27E99;
-}
-
-#memory {
-  border-color: #DCA561;
-  color: #DCA561;
-}
-
-#temperature {
-  border-color: #7AA89F;
-  color: #7AA89F;
+  border-color: @love;
+  color: @love;
 }
 
 #pulseaudio.bluetooth {
-  border-color: #6A9589;
-  color: #6A9589;
+  border-color: @pine;
+  color: @pine;
 }
 
 #pulseaudio.muted {
-  border-color: #727169;
-  color: #727169;
+  border-color: @muted;
+  color: @muted;
 }
