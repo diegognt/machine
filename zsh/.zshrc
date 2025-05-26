@@ -55,6 +55,9 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# Zoxide
+eval "$(zoxide init zsh)"
+
 # Prompt theme
 fpath+=$HOME/.zsh/typewritten
 autoload -U promptinit; promptinit
