@@ -71,7 +71,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
     # ZSH autosuggestions
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh# ZSH autosuggestions
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 elif [[ "$(uname)" == "Linux" ]]; then
     # ZSH autosuggestions
