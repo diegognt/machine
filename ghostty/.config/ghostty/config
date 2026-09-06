@@ -7,6 +7,8 @@ font-family-bold-italic=MonaspiceRn Nerd Font Mono
 font-family-italic=MonaspiceRn Nerd Font Mono
 font-family=MonaspiceAr Nerd Font Mono
 adjust-cell-height=2
+background-opacity = 0.8
+background-blur = 20
 
 font-feature=calt
 font-feature=ss01
