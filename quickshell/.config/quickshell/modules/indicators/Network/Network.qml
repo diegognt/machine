@@ -2,16 +2,16 @@ import QtQuick
 import Quickshell
 import Quickshell.Networking
 import "../../"
+import "../"
 
 // Bar entry point for the network indicator: derives connection state from
 // Quickshell.Networking, renders the bar label, and hosts the hover-popup
 // (NetworkPopup.qml) which itself hosts the nmcli-backed Wi-Fi browser
 // (WifiNetworkList.qml). See README.md in this folder for the full picture.
-Item {
+IndicatorIcon {
     id: root
-    anchors.verticalCenter: parent.verticalCenter
-    implicitWidth: label.implicitWidth
-    implicitHeight: Theme.iconSize
+    color: root.stateColor
+    text: root.icon
 
     // --- Devices ---
     readonly property var devices: Networking.devices.values
@@ -93,24 +93,11 @@ Item {
     }
 
     // Icon-only in the bar; connection name and full detail live in the
-    // hover popup below. Fixed height + centered alignment keeps it lined
-    // up with other icon-only indicators regardless of this font's own
-    // line-height metrics.
-    Text {
-        id: label
-        anchors.centerIn: parent
-        height: Theme.iconSize
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        font.family: Theme.iconFontFamily
-        font.pixelSize: Theme.iconSize
-        color: root.stateColor
-        text: root.icon
-    }
-
+    // hover popup below. Icon rendering itself is handled by the shared
+    // IndicatorIcon base (color/text bound above).
     MouseArea {
         id: hoverArea
-        anchors.fill: label
+        anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onEntered: root.keepOpen()
@@ -136,12 +123,11 @@ Item {
             border.width: 2
             border.color: Theme.overlay
 
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                acceptedButtons: Qt.NoButton
-                onEntered: root.keepOpen()
-                onExited: root.scheduleClose()
+            HoverHandler {
+                onHoveredChanged: {
+                    if (hovered) root.keepOpen();
+                    else root.scheduleClose();
+                }
             }
 
             NetworkPopup {

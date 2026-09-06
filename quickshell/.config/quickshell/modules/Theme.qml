@@ -63,8 +63,31 @@ QtObject {
 
     // Global top bar height. Used by Bar.qml for the PanelWindow's
     // implicitHeight, and by any popup/tooltip that needs to offset itself
-    // below the bar (e.g. PopupWindow anchor.margins.top).
-    readonly property int barHeight: 30
+    // below the bar (e.g. PopupWindow anchor.margins.top). Fixed regardless
+    // of content.
+    readonly property int barHeight: 48
+
+    // Padding between the bar's own edges and the islands placed inside it.
+    readonly property int barPaddingHorizontal: 6
+    readonly property int barPaddingVertical: 4
+
+    // Fixed height for each indicator pill (ModulePill), owned solely by
+    // the pill itself — independent of barHeight/barPaddingVertical so it
+    // doesn't silently shift if the bar's own sizing changes.
+    readonly property int pillHeight: 38
+
+    // Corner radius for each indicator pill (ModulePill).
+    readonly property int pillRadius: 6
+
+    // Space between the pill's content and its edge/border, both
+    // horizontally and vertically.
+    readonly property int pillPaddingHorizontal: 6
+    readonly property int pillPaddingVertical: 6
+
+    // Gap between elements inside a single pill's content row (e.g. icon +
+    // label). Default spacing for ModulePill; individual pills can override
+    // via their own `spacing` property.
+    readonly property int pillContentSpacing: 10
 
     // Global icon size for icon-only bar indicators (Battery, Network, ...)
     // so they render at a consistent size. Popup header icons use their own
@@ -74,23 +97,13 @@ QtObject {
     // Default text size used by any indicator's text (labels, popup body
     // text, etc.) - deliberately distinct from iconSize so icon glyphs and
     // regular text don't fight for the same scale.
-    readonly property int fontSize: 16
+    readonly property int fontSize: 14
 
     // Global icon font. Every icon glyph in the bar/popups should use this
     // (Google Material Symbols, outlined style) instead of mixing
     // FontAwesome/Nerd Font glyph sets.
     readonly property string iconFontFamily: "Material Symbols Outlined"
 
-    // ---- Spacing scale ----
-    // Shared spacing tokens so gaps/margins/padding stay consistent and
-    // adjustable from one place.
-    readonly property int spacingSmall:  8
-    readonly property int spacingMedium: 10
-    readonly property int spacingLarge:  16
-
-    // Margin between an island and the bar's left/right edge.
-    readonly property int barEdgeMargin: spacingSmall
-
     // Gap between separate pills within the same island.
-    readonly property int islandSpacing: spacingLarge
+    readonly property int islandSpacing: 8
 }

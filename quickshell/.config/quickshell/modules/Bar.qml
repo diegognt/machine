@@ -12,9 +12,16 @@ PanelWindow {
     }
 
     implicitHeight: Theme.barHeight
-    color: Theme.barBackground
+    color: "transparent"
 
-    LeftIsland {}
-    CenterIsland {}
-    RightIsland {}
+    Item {
+        id: content
+        anchors.fill: parent
+        anchors.leftMargin: Theme.barPaddingHorizontal
+        anchors.rightMargin: Theme.barPaddingHorizontal
+
+        LeftIsland {}
+        CenterIsland {}
+        RightIsland {}
+    }
 }

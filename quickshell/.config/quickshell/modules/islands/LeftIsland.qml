@@ -7,5 +7,4 @@ import "../indicators"
 Island {
     id: root
     anchors.left: parent.left
-    anchors.leftMargin: Theme.barEdgeMargin
 }
