@@ -9,3 +9,7 @@ require("misc")
 require("input")
 require("keybindings")
 require("rules")
+
+hl.on("hyprland.start", function ()
+    hl.exec_cmd("qs & hypridle & hyprpaper")-- Background apps
+end)
