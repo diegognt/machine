@@ -1,0 +1,4 @@
+module modules.indicators
+Workspaces 1.0 Workspaces.qml
+Battery 1.0 Battery.qml
+ClockWidget 1.0 ClockWidget.qml

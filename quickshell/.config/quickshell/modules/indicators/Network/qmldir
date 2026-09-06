@@ -1,0 +1,6 @@
+module modules.indicators.Network
+Network 1.0 Network.qml
+NetworkPopup 1.0 NetworkPopup.qml
+WifiToggle 1.0 WifiToggle.qml
+WifiNetworkList 1.0 WifiNetworkList.qml
+WifiConnectDialog 1.0 WifiConnectDialog.qml
