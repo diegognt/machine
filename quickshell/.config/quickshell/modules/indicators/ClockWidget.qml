@@ -2,12 +2,9 @@ import QtQuick
 import Quickshell.Io
 import "../"
 
-Text {
+IndicatorLabel {
     id: clock
-    anchors.verticalCenter: parent.verticalCenter
     font.capitalization: Font.Capitalize
-    font.pixelSize: Theme.fontSize
-    color: Theme.text
 
     Process {
         id: dateProc

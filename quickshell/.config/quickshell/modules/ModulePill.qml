@@ -1,6 +1,10 @@
 import QtQuick
 
-// Shared rounded, translucent background used behind each bar module.
+// Shared rounded, translucent background used behind each bar module. Its
+// height always fills the Island (which itself fills the bar's padded
+// content area) — the bar/island are solely responsible for the space
+// between indicators and the screen edges. This pill only manages its own
+// internal spacing: the padding between its content and its own edges.
 Rectangle {
     id: root
     default property alias content: contentRow.children
@@ -9,14 +13,10 @@ Rectangle {
     readonly property bool hovered: hoverArea.containsMouse
 
     anchors.verticalCenter: parent.verticalCenter
+    height: Theme.pillHeight
     color: Theme.pillBackground
-    radius: 8
-    implicitWidth: contentRow.implicitWidth + Theme.spacingLarge + Theme.spacingSmall
-    implicitHeight: contentRow.implicitHeight + Theme.spacingSmall + 4
-
-    border.width: 2
-    border.color: root.hovered ? Theme.overlay : Theme.pillBorder
-    Behavior on border.color { ColorAnimation { duration: 150 } }
+    radius: Theme.pillRadius
+    implicitWidth: contentRow.implicitWidth + Theme.pillPaddingHorizontal * 2
 
     MouseArea {
         id: hoverArea
@@ -28,6 +28,6 @@ Rectangle {
     Row {
         id: contentRow
         anchors.centerIn: parent
-        spacing: Theme.spacingSmall
+        spacing: Theme.pillContentSpacing
     }
 }

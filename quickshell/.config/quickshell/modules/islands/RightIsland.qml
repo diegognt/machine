@@ -8,7 +8,6 @@ import "../indicators/Network"
 Island {
     id: root
     anchors.right: parent.right
-    anchors.rightMargin: Theme.barEdgeMargin
 
     ModulePill { ClockWidget {} }
     ModulePill { Network {} }

@@ -29,6 +29,9 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 
+-- Reload Quickshell (kill + relaunch detached)
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("qs kill; qs -d"))
+
 -- Scrolling layout: column width presets (grow / shrink between 33%, 50%, 67%, 100%)
 hl.bind(mainMod .. " + bracketright", hl.dsp.layout("colresize +conf"))
 hl.bind(mainMod .. " + bracketleft",  hl.dsp.layout("colresize -conf"))

@@ -8,7 +8,7 @@ Island {
     anchors.horizontalCenter: parent.horizontalCenter
 
     ModulePill {
-        spacing: Theme.spacingMedium
+        spacing: 10
         Workspaces {}
     }
 }

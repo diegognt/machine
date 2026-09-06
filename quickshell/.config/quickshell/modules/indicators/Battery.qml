@@ -3,12 +3,11 @@ import Quickshell
 import Quickshell.Services.UPower
 import "../"
 
-Item {
+IndicatorIcon {
     id: root
-    anchors.verticalCenter: parent.verticalCenter
     visible: device.isLaptopBattery
-    implicitWidth: label.implicitWidth
-    implicitHeight: Theme.iconSize
+    color: root.stateColor
+    text: root.icon
 
     readonly property var device: UPower.displayDevice
 
@@ -100,24 +99,11 @@ Item {
     }
 
     // Icon-only in the bar; full detail (percentage, time, rate, health,
-    // power profile) lives in the hover popup below. Fixed height +
-    // centered alignment keeps it lined up with other icon-only
-    // indicators regardless of this font's own line-height metrics.
-    Text {
-        id: label
-        anchors.centerIn: parent
-        height: Theme.iconSize
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        font.family: Theme.iconFontFamily
-        font.pixelSize: Theme.iconSize
-        color: root.stateColor
-        text: root.icon
-    }
-
+    // power profile) lives in the hover popup below. Icon rendering itself
+    // is handled by the shared IndicatorIcon base (color/text bound above).
     MouseArea {
         id: hoverArea
-        anchors.fill: label
+        anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onEntered: root.keepOpen()
