@@ -1,0 +1,6 @@
+module modules.indicators.Bluetooth
+Bluetooth 1.0 Bluetooth.qml
+BluetoothPopup 1.0 BluetoothPopup.qml
+BluetoothToggle 1.0 BluetoothToggle.qml
+PairedDevices 1.0 PairedDevices.qml
+PairDeviceDialog 1.0 PairDeviceDialog.qml

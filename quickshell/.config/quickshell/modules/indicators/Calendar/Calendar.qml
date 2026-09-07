@@ -52,14 +52,28 @@ IndicatorLabel {
 
     PopupWindow {
         id: popup
-        anchor.window: calendar.barWindow
-        anchor.rect.x: calendar.barWindow ? calendar.mapToItem(calendar.barWindow.contentItem, 0, 0).x : 0
-        anchor.rect.y: Theme.barHeight
-        anchor.rect.width: calendar.width
-        anchor.rect.height: 0
-        anchor.edges: Edges.Bottom
-        anchor.gravity: Edges.Bottom
-        anchor.adjustment: PopupAdjustment.Slide
+
+        // Centered horizontally under the indicator label and flush below
+        // the bar. A plain reactive binding on anchor.rect.x/y isn't
+        // reliable here (see Quickshell's own Tooltip.qml) — the anchor
+        // point must be (re)computed in onAnchoring, which fires whenever
+        // the popup is (re)positioned, using the already-known
+        // implicitWidth. With the default Top|Left edges and
+        // Bottom|Right gravity, the popup grows down-right from that
+        // computed point, so setting rect.x to the already-centered x
+        // places the popup's left edge exactly there.
+        anchor {
+            window: calendar.barWindow
+            gravity: Edges.Bottom | Edges.Right
+            adjustment: PopupAdjustment.Slide
+
+            onAnchoring: {
+                if (!calendar.barWindow) return;
+                const pos = calendar.mapToItem(calendar.barWindow.contentItem, calendar.width / 2 - popup.implicitWidth / 2, 0);
+                anchor.rect.x = pos.x;
+                anchor.rect.y = Theme.barHeight;
+            }
+        }
         implicitWidth: 260
         implicitHeight: popupContent.implicitHeight + 24
         visible: calendar.showDetails
