@@ -58,13 +58,11 @@ eval "$(pyenv virtualenv-init -)"
 # Zoxide
 eval "$(zoxide init zsh)"
 
-# Prompt theme
-fpath+=$HOME/.zsh/typewritten
-autoload -U promptinit; promptinit
-prompt typewritten
+# Prompt theme (pure zsh, based on typewritten)
+source $HOME/.config/zsh/prompt/prompt.zsh
 
 #Customs
-export TYPEWRITTEN_PROMPT_LAYOUT="singleline"
+export PROMPT_LAYOUT="singleline"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     # ZSH Highlighting
