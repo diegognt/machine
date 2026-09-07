@@ -133,14 +133,33 @@ IndicatorIcon {
 
     PopupWindow {
         id: popup
-        anchor.window: root.barWindow
-        anchor.rect.x: root.barWindow ? root.mapToItem(root.barWindow.contentItem, 0, 0).x : 0
-        anchor.rect.y: Theme.barHeight
-        anchor.rect.width: root.width
-        anchor.rect.height: 0
-        anchor.edges: Edges.Bottom
-        anchor.gravity: Edges.Bottom
-        anchor.adjustment: PopupAdjustment.Slide
+
+        // Centered horizontally under the indicator icon and flush below
+        // the bar. A plain reactive binding on anchor.rect.x/y isn't
+        // reliable here (see Quickshell's own Tooltip.qml) — the anchor
+        // point must be (re)computed in onAnchoring, which fires whenever
+        // the popup is (re)positioned, using the already-known
+        // implicitWidth. With the default Top|Left edges and
+        // Bottom|Right gravity, the popup grows down-right from that
+        // computed point, so setting rect.x to the already-centered x
+        // places the popup's left edge exactly there.
+        anchor {
+            window: root.barWindow
+            gravity: Edges.Bottom | Edges.Right
+            adjustment: PopupAdjustment.Slide
+
+            onAnchoring: {
+                if (!root.barWindow) return;
+                // x centers under the icon; y uses Theme.barHeight (the
+                // bar's own fixed height, in the bar window's own
+                // coordinate space) instead of root.height, since the
+                // icon itself is vertically centered inside its (shorter)
+                // pill and doesn't span the bar's full height.
+                const pos = root.mapToItem(root.barWindow.contentItem, root.width / 2 - popup.implicitWidth / 2, 0);
+                anchor.rect.x = pos.x;
+                anchor.rect.y = Theme.barHeight;
+            }
+        }
         implicitWidth: 260
         implicitHeight: popupContent.implicitHeight + 24
         visible: root.showDetails
