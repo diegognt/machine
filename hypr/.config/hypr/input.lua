@@ -20,8 +20,30 @@ hl.config({
     },
 })
 
+-- Scrolling layout: 3-finger horizontal swipe moves focus between windows
+-- along the stream. wrap_focus = true (see look_and_feel.lua) makes the
+-- focus wrap from the last window back to the first, and vice versa.
+-- Swipe left  -> next window (right in the stream)
+-- Swipe right -> previous window (left in the stream)
 hl.gesture({
     fingers = 3,
+    direction = "left",
+    action = function()
+        hl.dispatch(hl.dsp.layout("focus r"))
+    end,
+})
+
+hl.gesture({
+    fingers = 3,
+    direction = "right",
+    action = function()
+        hl.dispatch(hl.dsp.layout("focus l"))
+    end,
+})
+
+-- Workspace switching moved to 4 fingers since 3 fingers now navigate windows
+hl.gesture({
+    fingers = 4,
     direction = "horizontal",
     action = "workspace"
 })
