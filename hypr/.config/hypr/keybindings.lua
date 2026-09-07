@@ -48,12 +48,14 @@ hl.bind(mainMod .. " + BackSpace",         hl.dsp.layout("consume_or_expel"))
 hl.bind(mainMod .. " + SHIFT + BackSpace", hl.dsp.layout("promote"))
 
 -- Move focus along the stream (arrows or vim keys)
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+-- Left/right use the scrolling layout's own "focus l/r" message so that
+-- wrap_focus (see look_and_feel.lua) actually applies (movefocus ignores it).
+hl.bind(mainMod .. " + left",  hl.dsp.layout("focus l"))
+hl.bind(mainMod .. " + right", hl.dsp.layout("focus r"))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
-hl.bind(mainMod .. " + H",     hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L",     hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + H",     hl.dsp.layout("focus l"))
+hl.bind(mainMod .. " + L",     hl.dsp.layout("focus r"))
 hl.bind(mainMod .. " + K",     hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J",     hl.dsp.focus({ direction = "down" }))
 
