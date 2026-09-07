@@ -111,15 +111,24 @@ IndicatorIcon {
     }
 
     // Hover-triggered detail popup: state, time, rate, health, model, and a
-    // power-profile switcher. Anchored below the bar using the shared
-    // Theme.barHeight so the offset stays correct if the bar height changes.
+    // power-profile switcher. Anchored to the Bar (PanelWindow) itself
+    // rather than this indicator item, so its top edge always sits exactly
+    // at the bar's own bottom edge - regardless of how this item is
+    // vertically centered inside its (shorter) pill - instead of
+    // overlapping the indicator/pill. Horizontally it still centers under
+    // this item via the mapped anchor rect below.
+    readonly property var barWindow: QsWindow.window
+
     PopupWindow {
         id: popup
-        anchor.item: root
+        anchor.window: root.barWindow
+        anchor.rect.x: root.barWindow ? root.mapToItem(root.barWindow.contentItem, 0, 0).x : 0
+        anchor.rect.y: Theme.barHeight
+        anchor.rect.width: root.width
+        anchor.rect.height: 0
         anchor.edges: Edges.Bottom
         anchor.gravity: Edges.Bottom
         anchor.adjustment: PopupAdjustment.Slide
-        anchor.margins.top: Theme.barHeight
         implicitWidth: 240
         implicitHeight: detailCol.implicitHeight + 24
         visible: root.showDetails
