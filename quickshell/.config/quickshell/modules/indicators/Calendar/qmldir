@@ -1,0 +1,3 @@
+module modules.indicators.Calendar
+Calendar 1.0 Calendar.qml
+CalendarPopup 1.0 CalendarPopup.qml

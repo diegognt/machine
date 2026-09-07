@@ -1,6 +1,7 @@
 import QtQuick
 import "../"
 import "../indicators"
+import "../indicators/Calendar"
 import "../indicators/Network"
 
 // Right island — date/time, network, and battery indicators, each in its
@@ -9,7 +10,7 @@ Island {
     id: root
     anchors.right: parent.right
 
-    ModulePill { ClockWidget {} }
+    ModulePill { Calendar {} }
     ModulePill { Network {} }
     ModulePill { Battery {} }
 }

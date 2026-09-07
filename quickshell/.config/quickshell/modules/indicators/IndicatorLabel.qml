@@ -2,7 +2,7 @@ import QtQuick
 import "../"
 
 // Shared "text" indicator content: a single line of body text, sized/styled
-// consistently across every text-based indicator (ClockWidget, ...). Meant
+// consistently across every text-based indicator (Calendar, ...). Meant
 // to be placed directly inside a ModulePill (optionally alongside an
 // IndicatorIcon) so ModulePill's own `spacing`/`pillContentSpacing` creates
 // a real gap between multiple indicator parts when more than one is
