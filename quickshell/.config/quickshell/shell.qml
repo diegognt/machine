@@ -1,3 +1,8 @@
+import Quickshell
 import "./modules"
+import "./modules/launcher"
 
-Bar {}
+ShellRoot {
+    Bar {}
+    Launcher {}
+}
