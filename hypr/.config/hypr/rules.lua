@@ -41,6 +41,13 @@ hl.window_rule({
     scrolling_width = 1.0,
 })
 
+-- App launcher: slide up from the bottom edge instead of the default fade.
+hl.layer_rule({
+    name      = "app-launcher-slide",
+    match     = { namespace = "^app-launcher$" },
+    animation = "slide",
+})
+
 -- Hyprland-run windowrule
 hl.window_rule({
     name  = "move-hyprland-run",
