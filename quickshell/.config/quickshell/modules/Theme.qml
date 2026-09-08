@@ -106,4 +106,22 @@ QtObject {
 
     // Gap between separate pills within the same island.
     readonly property int islandSpacing: 8
+
+    // Maps a 0.0-1.0 ratio (e.g. brightness/volume level) onto the
+    // grayscale text hierarchy (muted -> subtle -> text). Pair with
+    // `Behavior on color { ColorAnimation {} }` at the call site.
+    function lerpColor(a, b, t) {
+        return Qt.rgba(
+            a.r + (b.r - a.r) * t,
+            a.g + (b.g - a.g) * t,
+            a.b + (b.b - a.b) * t,
+            1
+        );
+    }
+
+    function grayLevel(ratio) {
+        const r = Math.max(0, Math.min(1, ratio));
+        if (r <= 0.5) return lerpColor(muted, subtle, r / 0.5);
+        return lerpColor(subtle, text, (r - 0.5) / 0.5);
+    }
 }

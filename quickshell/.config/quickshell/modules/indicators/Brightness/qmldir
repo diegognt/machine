@@ -1,0 +1,4 @@
+module modules.indicators.Brightness
+Brightness 1.0 Brightness.qml
+BrightnessPopup 1.0 BrightnessPopup.qml
+BrightnessSlider 1.0 BrightnessSlider.qml
