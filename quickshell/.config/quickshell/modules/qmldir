@@ -1,4 +1,5 @@
 module modules
 singleton Theme 1.0 Theme.qml
+singleton ControlCenterState 1.0 ControlCenterState.qml
 ModulePill 1.0 ModulePill.qml
 Bar 1.0 Bar.qml

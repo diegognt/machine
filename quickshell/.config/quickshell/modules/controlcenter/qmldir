@@ -1,0 +1,13 @@
+module modules.controlcenter
+ControlCenter 1.0 ControlCenter.qml
+SectionCard 1.0 SectionCard.qml
+ToggleTile 1.0 ToggleTile.qml
+ControlSlider 1.0 ControlSlider.qml
+UserAvatar 1.0 UserAvatar.qml
+UserHeader 1.0 UserHeader.qml
+SessionControls 1.0 SessionControls.qml
+MetricRow 1.0 MetricRow.qml
+HardwareSection 1.0 HardwareSection.qml
+ConnectivitySection 1.0 ConnectivitySection.qml
+VolumeSection 1.0 VolumeSection.qml
+BrightnessSection 1.0 BrightnessSection.qml

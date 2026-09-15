@@ -107,6 +107,33 @@ QtObject {
     // Gap between separate pills within the same island.
     readonly property int islandSpacing: 8
 
+    // ---- Control Center ----
+    // Fraction of the screen's width the Control Center panel occupies
+    // when open (ControlCenter.qml's panelWidth = screenWidth * this).
+    readonly property real controlCenterWidthRatio: 0.25
+
+    // Gap between the Control Center panel's own outer edge/border and
+    // its content (header row, section list) - mirrors barPaddingHorizontal/
+    // Vertical's role for the bar.
+    readonly property int controlCenterPadding: 16
+
+    // Gap between the Control Center's header row and the section list
+    // below it.
+    readonly property int controlCenterHeaderSpacing: 12
+
+    // Vertical gap between consecutive section cards in the Control
+    // Center's section list.
+    readonly property int controlCenterSectionSpacing: 12
+
+    // Padding between a SectionCard's own border and its content
+    // (title row, divider, body) - mirrors pillPaddingHorizontal/Vertical's
+    // role for ModulePill.
+    readonly property int sectionCardPadding: 12
+
+    // Gap between a SectionCard's own content pieces (title row, divider,
+    // body) - mirrors pillContentSpacing's role for ModulePill.
+    readonly property int sectionCardSpacing: 10
+
     // Maps a 0.0-1.0 ratio (e.g. brightness/volume level) onto the
     // grayscale text hierarchy (muted -> subtle -> text). Pair with
     // `Behavior on color { ColorAnimation {} }` at the call site.

@@ -20,4 +20,5 @@ Island {
     ModulePill { Volume {} }
     ModulePill { Brightness {} }
     ModulePill { Battery {} }
+    ModulePill { ControlCenterToggle {} }
 }
